@@ -59,7 +59,7 @@
     <string>Password:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="mLoginButton">
    <property name="geometry">
     <rect>
      <x>160</x>
