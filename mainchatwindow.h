@@ -1,6 +1,8 @@
 #ifndef MAINCHATWINDOW_H
 #define MAINCHATWINDOW_H
-
+#include "openssl/ssl.h"
+#include "openssl/err.h"
+#include "openssl/bio.h"
 #include <QMainWindow>
 #include "login.h"
 #include "user.h"

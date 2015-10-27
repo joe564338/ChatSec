@@ -7,6 +7,8 @@ MainChatWindow::MainChatWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainChatWindow)
 {
+    SSL *ssl;
+    SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
     ui->setupUi(this);
     mShowDialogueWindow = false;
     mShowLoginWindow = true;
@@ -45,6 +47,7 @@ void MainChatWindow::on_mSendButton_clicked()
 {
     if(!mIsConnected){
         QString message = ui->mChatBox->toPlainText();
+
         ui->mChatHistory->append(message);
         ui->mChatHistory->setFontItalic(true);
         ui->mChatHistory->append("You are offline");

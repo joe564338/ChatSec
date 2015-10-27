@@ -26,3 +26,20 @@ HEADERS  += mainchatwindow.h \
 FORMS    += mainchatwindow.ui \
     login.ui \
     logindialogue.ui
+
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -llibeay32M
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -llibeay32Md
+else:unix: LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -llibeay32M
+
+INCLUDEPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
+DEPENDPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -lssleay32M
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -lssleay32Md
+else:unix: LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -lssleay32M
+
+INCLUDEPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
+DEPENDPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
