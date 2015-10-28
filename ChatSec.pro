@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainchatwindow.cpp \
     login.cpp \
     logindialogue.cpp \
-    user.cpp
+    user.cpp \
+    channel.cpp
 
 HEADERS  += mainchatwindow.h \
     user.h \
     login.h \
-    logindialogue.h
+    logindialogue.h \
+    channel.h
 
 FORMS    += mainchatwindow.ui \
     login.ui \
