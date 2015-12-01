@@ -1,6 +1,6 @@
 #include "user.h"
 
-User::User(string usrNm, string pswrd){
+User::User(string usrNm){
     mUserName = usrNm;
-    mPassword = pswrd;
+    //mPassword = pswrd;
 }

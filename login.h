@@ -1,9 +1,9 @@
 #ifndef LOGIN_H
 #define LOGIN_H
-
+#include <string>
 #include <QWidget>
 /** Class for the login window. Only one instance is created at the start of the application
- * The window is shown and hidden when needed by show() and hide()
+ * The window is shown at start of application. show() and hide() manipulate the window.
 */
 namespace Ui {
 class Login;
@@ -15,6 +15,8 @@ class Login : public QWidget
 
 public:
     explicit Login(QWidget *parent = 0); //constructor
+    std::string mUserName;
+    std::string mChannel;
     ~Login();//destructor
 
 private slots:

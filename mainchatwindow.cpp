@@ -3,12 +3,17 @@
 #include "login.h"
 #include <thread>
 #include "logindialogue.h"
+#include "cstring"
+#include "openssl/applink.c"
+
 MainChatWindow::MainChatWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainChatWindow)
 {
-    SSL *ssl;
-    SSL_set_mode(ssl, SSL_MODE_AUTO_RETRY);
+
+    crypt = Crypter();
+    crypt.CreateRSA("C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/private_key.pem", 0);
+    crypt.CreateRSA("C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/public_key.pem", 1);
     ui->setupUi(this);
     mShowDialogueWindow = false;
     mShowLoginWindow = true;
@@ -18,7 +23,7 @@ MainChatWindow::MainChatWindow(QWidget *parent) :
     login->raise();
     login->activateWindow();
     mIsConnected = false;
-    user = new User("guest", "temp");
+    user = new User("guest");
 
 }
 
@@ -48,6 +53,12 @@ void MainChatWindow::on_mSendButton_clicked()
     if(!mIsConnected){
         QString message = ui->mChatBox->toPlainText();
 
+        unsigned char data[4096] = {};
+        memcpy(data, message.toStdString().c_str(), message.toStdString().size() + 1);
+        unsigned char encrypted[4096] = {};
+        std::cout << "Work" << endl;
+        int enc = crypt.public_encrypt(data, strlen((char *) data), encrypted);
+        message = QString::fromStdString(std::string((char*)encrypted));
         ui->mChatHistory->append(message);
         ui->mChatHistory->setFontItalic(true);
         ui->mChatHistory->append("You are offline");

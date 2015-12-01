@@ -8,6 +8,8 @@
 #include "user.h"
 #include "logindialogue.h"
 #include <thread>
+#include "crypter.h"
+#include <iostream>
 using namespace::std;
 namespace Ui {
 class MainChatWindow;
@@ -40,7 +42,7 @@ private:
     Login* login;
 
     User *user;
-
+    Crypter crypt;
     loginDialogue *dialogue;
 };
 

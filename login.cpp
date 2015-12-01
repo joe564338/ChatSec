@@ -17,5 +17,7 @@ Login::~Login()
 
 void Login::on_mLoginButton_clicked()
 {
+    mUserName = ui->mUserNameText->text().toUtf8();
+    mChannel = ui->mPasswordText->text().toUtf8();
     this->hide();
 }

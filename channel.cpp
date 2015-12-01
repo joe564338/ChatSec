@@ -1,14 +1,14 @@
 #include "channel.h"
-Channel::Channel(string channelName, string channelPassword){
+Channel::Channel(string channelName){
     mChannelName = channelName;
-    mChannelPassword = channelPassword;
+
 }
-Channel::Connect(){
+bool Channel::Connect(){
     return mIsConnected;
 }
-Channel::Disconnect(){
+bool Channel::Disconnect(){
     return mIsConnected;
 }
-Channel::GetChannelName(){
+string Channel::GetChannelName(){
     return mChannelName;
 }

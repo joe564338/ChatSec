@@ -17,17 +17,22 @@ SOURCES += main.cpp\
     login.cpp \
     logindialogue.cpp \
     user.cpp \
-    channel.cpp
+    channel.cpp \
+    channelselect.cpp \
+    crypter.cpp
 
 HEADERS  += mainchatwindow.h \
     user.h \
     login.h \
     logindialogue.h \
-    channel.h
+    channel.h \
+    channelselect.h \
+    crypter.h
 
 FORMS    += mainchatwindow.ui \
     login.ui \
-    logindialogue.ui
+    logindialogue.ui \
+    channelselect.ui
 
 
 

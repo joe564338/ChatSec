@@ -56,14 +56,14 @@
     </rect>
    </property>
    <property name="text">
-    <string>Password:</string>
+    <string>Channel:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="mLoginButton">
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>200</y>
+     <y>220</y>
      <width>75</width>
      <height>23</height>
     </rect>
