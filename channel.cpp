@@ -14,22 +14,24 @@ string Channel::GetChannelName(){
     return mChannelName;
 }
 void Channel::UploadKeys(std::string user, char* privKey, char* publicKey){
-    /*QNetworkAccessManager *nwam = new QNetworkAccessManager;
+    QNetworkAccessManager *nwam = new QNetworkAccessManager;
 
-    QNetworkRequest request(QUrl("http://csks.ckrz.de/api/v1.0/keys/test1"));
+    QNetworkRequest requestPoster(QUrl("http://csks.ckrz.de/api/v1.0/keys"));
 
     QByteArray data;
     QUrlQuery params;
     std::cout << "Sometin" << std::endl;
     QString userString = QString::fromUtf8(user.c_str());
-    QString signingKeyString = QString::fromUtf8(privKey);
+    QString signingKeyString = QString::fromUtf8("");
     QString publicKeyString = QString::fromUtf8(publicKey);
-    params.addQueryItem("username", userString );
+    std::string tester = userString.toUtf8();
+    std::cout << tester << std::endl;
+    params.addQueryItem(" username", userString );
     params.addQueryItem("signing_key", signingKeyString );
     params.addQueryItem("encryption_key", publicKeyString);
     data.append(params.toString());
     data.remove(0,1);
-    */
+
 
 
     QUrl url("http://csks.ckrz.de/api/v1.0/keys/test1");
@@ -41,9 +43,9 @@ void Channel::UploadKeys(std::string user, char* privKey, char* publicKey){
 
 std::cout << "1-.-.-.-23" << std::endl;
 
-/*
-    //QNetworkReply *reply = nwam->post(request,data);
-    QNetworkReply *reply2 = nwam->get(request);
+
+    QNetworkReply *reply = nwam->post(requestPoster,data);
+    /*QNetworkReply *reply2 = nwam->get(request);
     connect(nwam, SIGNAL(finished(reply2)),
                       this, SLOT(parseNetworkResponse(reply2)));
 
