@@ -10,10 +10,11 @@ MainChatWindow::MainChatWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainChatWindow)
 {
-
     crypt = Crypter();
-    crypt.CreateRSA("C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/private_key.pem", 0);
-    crypt.CreateRSA("C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/public_key.pem", 1);
+    char* privKeyLocation = "C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/private_key.pem";
+    char* pubKeyLocation = "C:/Users/Joe/Documents/build-ChatSec-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/public_key.pem";
+    crypt.CreateRSA(privKeyLocation, 0);
+    crypt.CreateRSA(pubKeyLocation, 1);
     ui->setupUi(this);
     mShowDialogueWindow = false;
     mShowLoginWindow = true;
@@ -24,7 +25,11 @@ MainChatWindow::MainChatWindow(QWidget *parent) :
     login->activateWindow();
     mIsConnected = false;
     user = new User("guest");
+    mChannelName = "Channel";
+    channel =  new Channel(mChannelName);
 
+
+    channel->UploadKeys(user->getName(), crypt.getKey(privKeyLocation), crypt.getKey(pubKeyLocation));
 }
 
 MainChatWindow::~MainChatWindow()
@@ -66,10 +71,10 @@ void MainChatWindow::on_mSendButton_clicked()
     }
 }
 
-void MainChatWindow::on_pushButton_clicked()
+/*void MainChatWindow::on_pushButton_clicked()
 {
 
-}
+}*/
 
 
 void MainChatWindow::on_mLoginButton_clicked()

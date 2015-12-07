@@ -2,5 +2,7 @@
 
 User::User(string usrNm){
     mUserName = usrNm;
-    //mPassword = pswrd;
+}
+string User::getName(){
+    return mUserName;
 }

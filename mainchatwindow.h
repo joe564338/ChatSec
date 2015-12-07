@@ -10,6 +10,7 @@
 #include <thread>
 #include "crypter.h"
 #include <iostream>
+#include "channel.h"
 using namespace::std;
 namespace Ui {
 class MainChatWindow;
@@ -33,14 +34,15 @@ public:
 private slots:
     void on_mSendButton_clicked();
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
     void on_mLoginButton_clicked();
 
 private:
     Ui::MainChatWindow *ui;
     Login* login;
-
+    Channel *channel;
+    std::string mChannelName;
     User *user;
     Crypter crypt;
     loginDialogue *dialogue;

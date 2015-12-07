@@ -8,7 +8,7 @@ using namespace::std;
 class User{
 public:
     User(string usrNm);
-
+    string getName();
     void Mute(string usrNm);
     void SetName(string name);
 private:
