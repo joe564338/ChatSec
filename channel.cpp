@@ -2,6 +2,10 @@
 
 Channel::Channel(string channelName){
     mChannelName = channelName;
+    connect(&sender, &QWebSocket::connected, this, &Channel::onConnect);
+    sender.open(QUrl("ws://localhost:1234"));
+
+    sender.sendTextMessage(QString("test"));
     connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parseNetworkResponse(QNetworkReply*)));
 }
 bool Channel::Connect(){
@@ -13,6 +17,10 @@ bool Channel::Disconnect(){
 string Channel::GetChannelName(){
     return mChannelName;
 }
+void Channel::onConnect(){
+    std::cout << "HI" << std::endl;
+}
+
 void Channel::UploadKeys(std::string user, char* privKey, char* publicKey){
     QNetworkAccessManager *nwam = new QNetworkAccessManager;
 

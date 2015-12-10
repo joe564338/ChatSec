@@ -14,6 +14,7 @@
 #include <thread>
 #include <chrono>
 #include <QWidget>
+#include <QtWebSockets/QWebSocket>
 using namespace::std;
 class Channel : public QObject {
     Q_OBJECT
@@ -25,7 +26,9 @@ public:
     bool mIsConnected = false;
     void UploadKeys(std::string user, char *privKey, char *publicKey);
     char* encryptKey;
+    QWebSocket sender;
 private:
+    void onConnect();
     string mChannelName;
     QNetworkAccessManager networkManager;
 private slots:

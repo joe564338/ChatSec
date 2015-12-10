@@ -11,6 +11,7 @@
 #include "crypter.h"
 #include <iostream>
 #include "channel.h"
+
 using namespace::std;
 namespace Ui {
 class MainChatWindow;
@@ -46,6 +47,7 @@ private:
     User *user;
     Crypter crypt;
     loginDialogue *dialogue;
+    //void OnNewMessage(std::string const& name,message::ptr const& data,bool hasAck,message::ptr &ack_resp);
 };
 
 #endif // MAINCHATWINDOW_H

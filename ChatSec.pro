@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += network
+QT       += websockets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ChatSec
@@ -50,3 +51,12 @@ else:unix: LIBS += -L$$PWD/../../../../OpenSSL-Win64/lib/VC/ -lssleay32M
 
 INCLUDEPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
 DEPENDPATH += $$PWD/../../../../OpenSSL-Win64/lib/VC
+
+
+
+
+
+
+
+
+

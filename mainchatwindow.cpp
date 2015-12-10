@@ -63,7 +63,11 @@ void MainChatWindow::on_mSendButton_clicked()
         unsigned char encrypted[4096] = {};
         std::cout << "Work" << endl;
         int enc = crypt.public_encrypt(data, strlen((char *) data), encrypted);
+        unsigned char decrypted[4096] = {};
         message = QString::fromStdString(std::string((char*)encrypted));
+        ui->mChatHistory->append(message);
+        int dec = crypt.private_decrypt(encrypted, strlen((char *) encrypted), decrypted);
+        message = QString::fromStdString(std::string((char*) decrypted));
         ui->mChatHistory->append(message);
         ui->mChatHistory->setFontItalic(true);
         ui->mChatHistory->append("You are offline");
