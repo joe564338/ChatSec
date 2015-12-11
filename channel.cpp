@@ -2,25 +2,28 @@
 
 Channel::Channel(string channelName){
     mChannelName = channelName;
+    connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parseNetworkResponse(QNetworkReply*)));
+}
+//connects to chat server
+bool Channel::Connect(){
     connect(&sender, &QWebSocket::connected, this, &Channel::onConnect);
     sender.open(QUrl("ws://localhost:1234"));
 
     sender.sendTextMessage(QString("test"));
-    connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parseNetworkResponse(QNetworkReply*)));
-}
-bool Channel::Connect(){
     return mIsConnected;
 }
+//not fully implemented yet
 bool Channel::Disconnect(){
     return mIsConnected;
 }
 string Channel::GetChannelName(){
     return mChannelName;
 }
+
 void Channel::onConnect(){
     std::cout << "HI" << std::endl;
 }
-
+//Connect to key server for uploading keys as well as retrieving desired public key
 void Channel::UploadKeys(std::string user, char* privKey, char* publicKey){
     QNetworkAccessManager *nwam = new QNetworkAccessManager;
 
@@ -45,7 +48,6 @@ void Channel::UploadKeys(std::string user, char* privKey, char* publicKey){
     QUrl url("http://csks.ckrz.de/api/v1.0/keys/test1");
     QNetworkRequest request;
     request.setUrl(url);
-    //connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(parseNetworkResponse(QNetworkReply*)));
     QNetworkReply* currentReply = networkManager.get(request);  // GET
     std::cout << "hi joe 123" << std::endl;
 
@@ -53,20 +55,7 @@ std::cout << "1-.-.-.-23" << std::endl;
 
 
     QNetworkReply *reply = nwam->post(requestPoster,data);
-    /*QNetworkReply *reply2 = nwam->get(request);
-    connect(nwam, SIGNAL(finished(reply2)),
-                      this, SLOT(parseNetworkResponse(reply2)));
 
-
-    //QByteArray keyStuff = reply2->readAll();
-    //QString encKey = QString::fromUtf8(keyStuff.data(), keyStuff.size());
-    //QJsonDocument jsonDoc = QJsonDocument::fromJson(keyStuff);
-    //QJsonObject jsonObj = jsonDoc.object();
-    //QString encKey = jsonObj["encryption_key"].toString();
-    //std::string s = encKey.toUtf8();
-    //std::cout << s << std::endl;
-    std::cout << "KEY" << std::endl;
-*/
 }
 
 void Channel::parseNetworkResponse( QNetworkReply* finished )
@@ -91,33 +80,6 @@ void Channel::parseNetworkResponse( QNetworkReply* finished )
     QString encKey = jsonObj["encryption_key"].toString();
     std::string s = encKey.toUtf8();
     std::cout << s << std::endl;
-    //emit jokeReady( data );
-}
-/*
-// Fragments from ChuckNorrisAPI.cpp
-ChuckNorrisAPI::ChuckNorrisAPI(QObject *parent) :
-    QObject(parent)
-{
-    QObject::connect(&m_nam, SIGNAL(finished(QNetworkReply*)),
-                     this, SLOT(parseNetworkResponse(QNetworkReply*)));
+    mIsConnected = true;
 }
 
-void ChuckNorrisAPI::getRequest( const QString &urlString )
-{
-    QUrl url ( urlString );
-    QNetworkRequest req ( url );
-    m_nam.get( req );
-}
-void ChuckNorrisAPI::parseNetworkResponse( QNetworkReply *finished )
-{
-    if ( finished->error() != QNetworkReply::NoError )
-    {
-        // A communication error has occurred
-        emit networkError( finished->error() );
-        return;
-    }
-
-    // QNetworkReply is a QIODevice. So we read from it just like it was a file
-    QByteArray data = finished->readAll();
-    emit jokeReady( data );
-}*/

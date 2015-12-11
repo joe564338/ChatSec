@@ -2,7 +2,7 @@
 #define CHANNELSELECT_H
 
 #include <QWidget>
-
+//UI for typing in Channel name
 namespace Ui {
 class ChannelSelect;
 }

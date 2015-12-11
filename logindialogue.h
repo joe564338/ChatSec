@@ -2,7 +2,7 @@
 #define LOGINDIALOGUE_H
 
 #include <QDialog>
-
+//class to verify the user does want to relogin
 namespace Ui {
 /** Window for confirming decision to re-login if the user is already connected*/
 class loginDialogue;

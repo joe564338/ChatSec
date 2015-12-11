@@ -1,12 +1,12 @@
 #include "crypter.h"
 
 //#define RSA_F_RSA_PADDING_ADD_PKCS1_OAEP_MGF1        154
-
+//just an empty constructor for access to functions
 Crypter::Crypter()
 {
 
 }
-
+//retrieves public key file for uploading to server
 char* Crypter::getKey(char* pk){
     FILE *f = fopen(pk, "rb");
     fseek(f, 0, SEEK_END);
@@ -20,7 +20,7 @@ char* Crypter::getKey(char* pk){
     key[fsize] = 0;
     return key;
 }
-
+//create the RSA pointers for encryption/decryption
 void Crypter::CreateRSA(char * fileName, int publicNum){
 
     FILE * fp = fopen(fileName,"rb");
@@ -45,11 +45,12 @@ void Crypter::CreateRSA(char * fileName, int publicNum){
 
 
 }
-
+//encrypts with public key
 int Crypter::public_encrypt(unsigned char *data, int data_len, unsigned char *encrypted){
     int result = RSA_public_encrypt(data_len, data, encrypted, mPublicRSA, padding);
     return result;
 }
+//decrypts with private key
 int Crypter::private_decrypt(unsigned char *enc_data, int data_len, unsigned char *decrypted){
     int result = RSA_private_decrypt(data_len, enc_data, decrypted, mPrivateRSA, padding);
     return result;

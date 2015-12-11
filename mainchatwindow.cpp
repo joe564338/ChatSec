@@ -6,6 +6,8 @@
 #include "cstring"
 #include "openssl/applink.c"
 
+//initializes most of what we need for the application
+//some of the things that are initialized here may be moved to other classes in the future for better design
 MainChatWindow::MainChatWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainChatWindow)
@@ -27,16 +29,18 @@ MainChatWindow::MainChatWindow(QWidget *parent) :
     user = new User("guest");
     mChannelName = "Channel";
     channel =  new Channel(mChannelName);
-
-
     channel->UploadKeys(user->getName(), crypt.getKey(privKeyLocation), crypt.getKey(pubKeyLocation));
+    channel->Connect();
 }
 
 MainChatWindow::~MainChatWindow()
 {
     delete ui;
 }
-
+/*The following show/hide window methods are for manipulating various windows
+ * so constant construction & destruction is not necessary. They are not implemented
+ * yet but they would be used in various areas along with a thread that checks for
+ * these bool vars to manipulate the windows*/
 void MainChatWindow::showDialogueWindow(){
     mShowDialogueWindow = true;
 }
@@ -53,6 +57,8 @@ void MainChatWindow::hideLoginWindow(){
     mShowLoginWindow = false;
 }
 
+//to be used to send the message
+//right now there are issues with connecting to the chat server so it prints msg to screen instead
 void MainChatWindow::on_mSendButton_clicked()
 {
     if(!mIsConnected){

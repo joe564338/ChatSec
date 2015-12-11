@@ -11,7 +11,7 @@
 #include "crypter.h"
 #include <iostream>
 #include "channel.h"
-
+//class for main window of the application
 using namespace::std;
 namespace Ui {
 class MainChatWindow;
@@ -31,7 +31,7 @@ public:
     void showDialogueWindow();
     void hideLoginWindow();
     void hideDialogueWindow();
-    void showHide();
+    void showHide();//method to be run in thread
 private slots:
     void on_mSendButton_clicked();
 

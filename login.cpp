@@ -14,7 +14,7 @@ Login::~Login()
 {
     delete ui;
 }
-
+//inits login vars
 void Login::on_mLoginButton_clicked()
 {
     mUserName = ui->mUserNameText->text().toUtf8();
